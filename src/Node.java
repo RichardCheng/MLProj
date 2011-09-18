@@ -15,15 +15,10 @@ public class Node {
     public int m_splitting_feature;
     public double m_splitting_value;
     
+    public boolean p_leafNode;
+    
 	private class SplitInfo {
 		public ArrayList<Entry> leftLst, rightLst; 
-		
-		/*
-		public SplitInfo(ArrayList<Entry> leftLst, ArrayList<Entry> rightLst){
-			this.leftLst = leftLst; 
-			this.rightLst = rightLst; 
-		}
-		*/
 		
 		//split entrylst into two arraylists<Entry> according to the clause 
 		//	left: Entry.attribute.value <= compareValue
@@ -44,7 +39,8 @@ public class Node {
         m_splitting_criterion = criterion;
         m_stoppingParam = stoppingParam;
         if (stoppingParam < 1)
-        	throw new Exception ("stoppingParam must be positive"); 
+        	throw new Exception ("stoppingParam must be positive");
+		this.p_leafNode = false; 
     }
 	
 	//gets all possible values for attribute
@@ -65,6 +61,7 @@ public class Node {
 		if (m_entries.size() < m_stoppingParam){
 			//stop splitting
 			m_label = CalculateLabel(m_entries);
+			p_leafNode = true; 
 			return;
 		}
 		
@@ -101,6 +98,8 @@ public class Node {
 		m_rchild.m_entries = bestRchild; 
 		
     	m_label = CalculateLabel(m_entries); 
+    	p_leafNode = false; 
+    	
     	
     	//recursively set everything after; 
     	m_lchild.Split(); 
@@ -115,7 +114,7 @@ public class Node {
     		sum += e.label; 
     	}
     	return sum/entrylst.size() < 0.5 ? 0 : 1; 
-        
     }
+   
 
 }
