@@ -24,7 +24,11 @@ public class DataReader {
 			labelStr = line.substring(0, index); 
 			if (labelStr.length() == 0)
 				throw new Exception ("invalid label");
-			label = Integer.parseInt(labelStr); 
+			
+			if (labelStr.equals("M"))
+				label = 0;
+			else 
+				label = 1;
 			
 			line = line.substring(index+1).trim() + " "; 
 			
