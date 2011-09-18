@@ -81,23 +81,24 @@ public class Tree {
     	
     }
 
-    //TODO
+    //predicts the label of a predictee using the tree
     public int predictLabel(Entry predictee){
     	
     	Node currentNode = root; 
     	
     	while (true) {
     		
-    		//if (currentNode.p_leafNode )
-    		
-    	    //int splitting_feature = currentNode.m_splitting_feature;
-    	   // int splitting_value = currentNode.m_splitting_value;
+    		if (currentNode.p_leafNode)
+    			return currentNode.m_label; 
+    		  		
+    	    int splitting_feature = currentNode.m_splitting_feature;
+    	    int splitting_value = currentNode.m_splitting_value;
     	    
-    	    //if (predictee.features[splitting_feature] <= splitting_value)
+    	    if (predictee.features[splitting_feature] <= splitting_value)
+    	    	currentNode = currentNode.m_lchild; 
+    	    else
+    	    	currentNode = currentNode.m_rchild; 
     	}
-    	
-    	
-    	//return -1;
     }
     
 }
