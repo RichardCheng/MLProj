@@ -92,7 +92,6 @@ public class Utilities {
 		return contents;
 	}
 	
-	/*
 	//find euclidean distance between two entries
 	public static double euc_dist (Entry e1, Entry e2) throws Exception{
 		Entry.check(e1, e2); 
@@ -103,7 +102,6 @@ public class Utilities {
 	
 		return Math.sqrt(sum); 
 	}
-	*/
 	
 	public static double get_average (ArrayList<Double> lst){
 		double sum = 0; 
@@ -122,5 +120,18 @@ public class Utilities {
 		}
 		return Math.sqrt(sum/lst.size()); 
 	}
-
+	
+	// Compares two doubles to see if they're equal
+	boolean DoubleEquals (double A, double B){
+	    if (A == B)
+	        return true;
+	    
+		double maxRelativeError = 0.0001; 
+	    double relativeError;
+	    if (B > A)
+	        relativeError = (B - A) / B;
+	    else
+	        relativeError = (A - B) / A;
+	    return relativeError <= maxRelativeError;
+	}
 }
