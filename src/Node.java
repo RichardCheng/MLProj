@@ -67,7 +67,7 @@ public class Node {
 		
 		//find the local best split
 		int bestAttr = -1; 
-		int bestValue = -1 * Integer.MAX_VALUE; 
+		int bestValue = Integer.MIN_VALUE; 
 		double bestPerf = -1 * Double.MAX_VALUE; 
 		ArrayList<Entry> bestLchild = null, bestRchild = null;
 		
