@@ -116,5 +116,8 @@ public class Node {
     	return sum/entrylst.size() < 0.5 ? 0 : 1; 
     }
    
+    public int nodeCount(){
+    	return 1 + this.m_lchild.nodeCount() + this.m_rchild.nodeCount(); 
+    }
 
 }

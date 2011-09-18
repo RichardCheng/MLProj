@@ -3,13 +3,10 @@ public class Entry {
 
 	public int label;
 	public Integer[] features; 
-	public int predictedLabel; 
-
 	
 	public Entry (int label, Integer[] features){
 		this.label = label;
 		this.features = features; 
-		this.predictedLabel = Integer.MAX_VALUE; 
 	}
 	
 	

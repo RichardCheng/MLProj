@@ -6,19 +6,42 @@ public class Tree {
     
     public void growTree(ArrayList<Entry> data) throws Exception {
     	root = NodeFactory.returnNode();
-    	
     	root.m_entries = data;
     	root.split();
     }
     
-    //TODO
-    public double getValidationError(){
-    	return -1; 
+    public int nodeCount() {
+    	return root.nodeCount(); 
+    }
+    
+    //predicts the label of a predictee using the tree
+    public int predictLabel(Entry predictee){
+    	
+    	Node currentNode = root; 
+    	
+    	while (true) {
+    		
+    		if (currentNode.p_leafNode)
+    			return currentNode.m_label; 
+    		  		
+    	    int splitting_feature = currentNode.m_splitting_feature;
+    	    int splitting_value = currentNode.m_splitting_value;
+    	    
+    	    if (predictee.features[splitting_feature] <= splitting_value)
+    	    	currentNode = currentNode.m_lchild; 
+    	    else
+    	    	currentNode = currentNode.m_rchild; 
+    	}
     }
 
-    //TODO: implement
+    //count how many errors are made using a set of entries (this could be the validation set or test set)
     public int getError(ArrayList<Entry> testLst){
-    	return -1; 
+    	int errorNumber = 0; 
+    	for (Entry e : testLst){
+    		if (predictLabel(e) != e.label)
+    			errorNumber++; 
+    	}
+    	return errorNumber; 
     }
     
     private class PruneData {
@@ -36,7 +59,7 @@ public class Tree {
     	
     	do {
     		//error without pruning
-    		double default_error = getError(validationLst);
+    		int default_error = getError(validationLst);
     		
     		PruneData best = whereToPrune(root, validationLst); 
     		
@@ -58,7 +81,6 @@ public class Tree {
     }
     
     //find the best place to prune (node that minimizes error)
-
     public PruneData whereToPrune(Node n, ArrayList<Entry> validationLst){
     	
     	//Stop at leaf node
@@ -67,7 +89,7 @@ public class Tree {
 		
 		//prune at current node
 		n.p_leafNode = true; 
-		double error_current = getError(validationLst);
+		int error_current = getError(validationLst);
 		n.p_leafNode = false; 
 		
 		//prune somewhere in left branch
@@ -91,27 +113,7 @@ public class Tree {
 		}
 		
 		return best; 
-    	
     }
 
-    //predicts the label of a predictee using the tree
-    public int predictLabel(Entry predictee){
-    	
-    	Node currentNode = root; 
-    	
-    	while (true) {
-    		
-    		if (currentNode.p_leafNode)
-    			return currentNode.m_label; 
-    		  		
-    	    int splitting_feature = currentNode.m_splitting_feature;
-    	    int splitting_value = currentNode.m_splitting_value;
-    	    
-    	    if (predictee.features[splitting_feature] <= splitting_value)
-    	    	currentNode = currentNode.m_lchild; 
-    	    else
-    	    	currentNode = currentNode.m_rchild; 
-    	}
-    }
     
 }
