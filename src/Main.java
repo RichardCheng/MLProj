@@ -49,8 +49,8 @@ public class Main {
 				// Print the testing, validate, and training errors
 				System.out.printf("For stopping param = %d, Testing Error " +
 						"= %d, Validate Error = %d, Training Error = %d\n", 
-						i, t1.getError(bcan_test), t1.getError(bcan_validate),
-						t1.getError(bcan_train90));
+						i, t2.getError(bcan_test), t2.getError(bcan_validate),
+						t2.getError(bcan_train90));
 			}
 			
 			///////////////////////////////////////////////////////////////////
@@ -68,7 +68,7 @@ public class Main {
 			// Print the test errors, and total number of nodes
 			// TODO: NEED to have a function that gives the number of nodes.
 			System.out.printf("The Test Error = %d\nTotal number of nodes = %d", 
-					t1.getError(bcan_test));
+					t3.getError(bcan_test));
 			
 			///////////////////////////////////////////////////////////////////
 			// Part d)

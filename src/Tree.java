@@ -15,9 +15,9 @@ public class Tree {
     public double getValidationError(){
     	return -1; 
     }
-    
+
     //TODO: implement
-    public double getError(){
+    public int getError(ArrayList<Entry> testLst){
     	return -1; 
     }
     
@@ -32,13 +32,13 @@ public class Tree {
     }
     
     //prune at the node that minimizes error
-    public void Prune() {
+    public void Prune(ArrayList<Entry> validationLst) {
     	
     	do {
     		//error without pruning
-    		double default_error = getValidationError();
+    		double default_error = getError(validationLst);
     		
-    		PruneData best = whereToPrune(root); 
+    		PruneData best = whereToPrune(root, validationLst); 
     		
     		//if root == leaf (edge case)
     		if (best.n == null)
@@ -55,11 +55,11 @@ public class Tree {
     		
     	} while (true); 
     	
-    	
     }
     
     //find the best place to prune (node that minimizes error)
-    private PruneData whereToPrune(Node n){
+
+    public PruneData whereToPrune(Node n, ArrayList<Entry> validationLst){
     	
     	//Stop at leaf node
 		if (n.m_lchild == null && n.m_rchild == null)
@@ -67,14 +67,14 @@ public class Tree {
 		
 		//prune at current node
 		n.p_leafNode = true; 
-		double error_current = getValidationError();
+		double error_current = getError(validationLst);
 		n.p_leafNode = false; 
 		
 		//prune somewhere in left branch
-		PruneData p_left = whereToPrune(n.m_lchild); 
+		PruneData p_left = whereToPrune(n.m_lchild, validationLst); 
 		
 		//prune somewhere in right branch
-		PruneData p_right = whereToPrune(n.m_rchild); 
+		PruneData p_right = whereToPrune(n.m_rchild,validationLst); 
     	
 		//find best place to prune
 		PruneData best; 
@@ -95,8 +95,22 @@ public class Tree {
     }
 
     //TODO
-    public String predictLabel(){
-    	return null;
+    public int predictLabel(Entry predictee){
+    	
+    	Node currentNode = root; 
+    	
+    	while (true) {
+    		
+    		//if (currentNode.p_leafNode )
+    		
+    	    //int splitting_feature = currentNode.m_splitting_feature;
+    	   // int splitting_value = currentNode.m_splitting_value;
+    	    
+    	    //if (predictee.features[splitting_feature] <= splitting_value)
+    	}
+    	
+    	
+    	//return -1;
     }
     
 }
