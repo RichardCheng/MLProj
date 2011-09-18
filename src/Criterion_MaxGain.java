@@ -1,23 +1,20 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Criterion_MaxGain implements Criterion {
 
 	private double calculateEntropy(ArrayList<Entry> entries) {
-		double entropy = 0;
-		HashMap<Integer, Integer> test = new HashMap<Integer, Integer>();
+		int countZero = 0;
+		int countOne = 0;
 		
-		for (int i = 0; i < entries.size(); ++i) {
-			if (test.containsKey(entries.get(i).label)) {
-				test.put(entries.get(i).label, test.get((entries.get(i).label)) + 1);
-			}
+		for (Entry e : entries) {
+			if (e.label == 0)
+				++countZero;
+			else
+				++countOne;
 		}
 		
-		for (int key : test.keySet()) {
-			entropy += (double)(test.get(key))/((double)entries.size());
-		}
-		
-		return entropy;
+		return (double)(countZero)/((double)entries.size()) 
+				+ (double)(countOne)/((double)entries.size());
 	}
 	
 	@Override
