@@ -6,7 +6,8 @@ public class Tree {
     
     }
 
-    public String FindValue(){
+    
+    public String predictLabel(){
     	return null;
     }
     

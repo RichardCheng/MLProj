@@ -8,7 +8,7 @@ public class Node {
     public ArrayList<Entry> m_entries;
     public Node m_lchild;
     public Node m_rchild;
-    public int m_type;
+    public int m_label;
 
     public int m_stoppingParam;
 
@@ -64,7 +64,7 @@ public class Node {
     	//Stop at the stopping parameter
 		if (m_entries.size() < m_stoppingParam){
 			//stop splitting
-			m_type = CalculateType(m_entries);
+			m_label = CalculateLabel(m_entries);
 			return;
 		}
 		
@@ -100,16 +100,16 @@ public class Node {
 		m_rchild = NodeFactory.returnNode(); 
 		m_rchild.m_entries = bestRchild; 
 		
-    	m_type = CalculateType(m_entries); 
+    	m_label = CalculateLabel(m_entries); 
     	
     	//recursively set everything after; 
     	m_lchild.Split(); 
     	m_rchild.Split(); 
     }
 	
-    /// Find the type of this node(i.e., find all children/decedents 
-    // of this node, and set type to the majority.
-    public static int CalculateType(ArrayList<Entry> entrylst) {
+    /// Find the label of this node(i.e., find all children/decedents 
+    // of this node, and set label to the majority.
+    public static int CalculateLabel(ArrayList<Entry> entrylst) {
     	double sum = 0.; 
     	for (Entry e : entrylst) {
     		sum += e.label; 

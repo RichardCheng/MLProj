@@ -17,7 +17,5 @@ public class Entry {
 		if (e1.features.length != e2.features.length)
 			throw new Exception("unexpected feature size"); 
 	}
-
-	
 	
 }
