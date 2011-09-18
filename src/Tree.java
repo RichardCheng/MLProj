@@ -4,6 +4,18 @@ import java.util.ArrayList;
 public class Tree {
     public Node root;
     
+    public void growTree(ArrayList<Entry> data) throws Exception {
+    	root = NodeFactory.returnNode();
+    	
+    	root.m_entries = data;
+    	root.Split();
+    }
+    
+    //TODO
+    public double getValidationError(){
+    	return -1; 
+    }
+
     //TODO: implement
     public int getError(ArrayList<Entry> testLst){
     	return -1; 
@@ -46,6 +58,7 @@ public class Tree {
     }
     
     //find the best place to prune (node that minimizes error)
+
     public PruneData whereToPrune(Node n, ArrayList<Entry> validationLst){
     	
     	//Stop at leaf node

@@ -47,7 +47,6 @@ public class MathUtilities {
 	
 	// Generate a random integer in range [lowRange, highRange)
 	public static int genRandomIntRange(int lowRange, int highRange) {
-		
-		return -1;
+		return lowRange+(int)(Math.random()*(highRange-lowRange));
 	}			
 }
