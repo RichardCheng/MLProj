@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 public class Criterion_MaxGain implements Criterion {
 
+	private static double LOG2 = Math.log(2);
+	
 	private double calculateEntropy(ArrayList<Entry> entries) {
 		int countZero = 0;
 		int countOne = 0;
@@ -13,8 +15,10 @@ public class Criterion_MaxGain implements Criterion {
 				++countOne;
 		}
 		
-		return (double)(countZero)/((double)entries.size()) 
-				+ (double)(countOne)/((double)entries.size());
+		double p0 = (double)(countZero)/((double)entries.size()); 
+		double p1 = (double)(countOne)/((double)entries.size()); 
+				
+		return (p0*Math.log(p0)+p1*Math.log(p1))/LOG2; 
 	}
 	
 	@Override
