@@ -31,25 +31,47 @@ public class Node {
 					rightLst.add(e); 
 				else 
 					leftLst.add(e); 
-			} 
+			}
 		}
 	}
 
 	public Node(Criterion criterion, int stoppingParam) throws Exception {
         m_splitting_criterion = criterion;
         m_stoppingParam = stoppingParam;
-        if (stoppingParam < 1)
+        if (stoppingParam < 1){
+        	System.out.println("stoppingParam: " + stoppingParam);
         	throw new Exception ("stoppingParam must be positive");
+        }
 		this.p_leafNode = false; 
     }
 	
 	//gets all possible values for attribute
 	private HashSet<Integer> getAllValues(int attribute){
+		
+		
 		HashSet<Integer> values = new HashSet<Integer>(); 
 		for (Entry e : m_entries) {
 			values.add(e.features[attribute]); 
 		}
+		
+		//take out the largest value
+		Integer bestI = -1; 
+		for (Integer i : values){
+			if (i > bestI){
+				bestI = i;
+			}
+		}
+		values.remove(bestI); 
+		
 		return values; 	
+		
+		
+		/*
+		HashSet<Integer> values = new HashSet<Integer>(); 
+		for (int i = 0; i < 10; i++)
+			values.add(i); 
+		return values; 
+		*/
 	}
 
 	
@@ -61,6 +83,21 @@ public class Node {
 		if (m_entries.size() < m_stoppingParam){
 			//stop splitting
 			m_label = calculateLabel(m_entries);
+			p_leafNode = true; 
+			return;
+		}
+		
+		//stop if no info gain possible (everything has the same label)
+		boolean stop = true;
+		int firstLabel = m_entries.get(0).label; 
+		for (Entry e : m_entries){
+			if (e.label != firstLabel){
+				stop = false; 
+				break; 
+			}
+		}
+		if (stop){
+			m_label = firstLabel; 
 			p_leafNode = true; 
 			return;
 		}
@@ -100,6 +137,13 @@ public class Node {
     	m_label = calculateLabel(m_entries); 
     	p_leafNode = false; 
     	
+    	/*
+    	System.out.print(m_entries.size() + ": " + bestLchild.size() + " + " + bestRchild.size() + ": ");
+    	for (Entry e : m_entries){
+    		System.out.print(e.label + ","); 
+    	}
+    	System.out.println(); 
+    	*/
     	
     	//recursively set everything after; 
     	m_lchild.split(); 
@@ -117,6 +161,8 @@ public class Node {
     }
    
     public int nodeCount(){
+    	if (this.m_lchild == null && this.m_rchild == null)
+    		return 1; 
     	return 1 + this.m_lchild.nodeCount() + this.m_rchild.nodeCount(); 
     }
 

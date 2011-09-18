@@ -16,6 +16,7 @@ public class Main {
 			int[] stoppingParamList = new int[] {1,5,9,17,25,37,43,49};
 			
 			///////////////////////////////////////////////////////////////////
+			/*
 			// Part a)
 			System.out.printf("\n\nPart a)\n");
 			NodeFactory.changeCriterion(new Criterion_MaxGain());
@@ -68,7 +69,7 @@ public class Main {
 			// Print the test errors, and total number of nodes
 			System.out.printf("The Test Error = %d\nTotal number of nodes = %d", 
 					t3.getError(bcan_test), t3.nodeCount());
-			
+			*/
 			///////////////////////////////////////////////////////////////////
 			// Part d)
 			// Please refer to the function.
@@ -163,6 +164,7 @@ public class Main {
 		System.out.printf("The best stopping parameter = %d\n", bestStoppingParam);
 		
 		NodeFactory.changeStoppingParam(bestStoppingParam);
+		System.out.println("bestSP: " + bestStoppingParam);
 		Tree t4best = new Tree();
 		// Grow tree using bcan_train
 		t4best.growTree(bcan_train);
