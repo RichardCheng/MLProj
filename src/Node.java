@@ -64,7 +64,7 @@ public class Node {
     	//Stop at the stopping parameter
 		if (m_entries.size() < m_stoppingParam){
 			//stop splitting
-			m_type = CalculateType();
+			m_type = CalculateType(m_entries);
 			return;
 		}
 		
@@ -100,7 +100,7 @@ public class Node {
 		m_rchild = NodeFactory.returnNode(); 
 		m_rchild.m_entries = bestRchild; 
 		
-    	m_type = CalculateType(); 
+    	m_type = CalculateType(m_entries); 
     	
     	//recursively set everything after; 
     	m_lchild.Split(); 
@@ -109,9 +109,12 @@ public class Node {
 	
     /// Find the type of this node(i.e., find all children/decedents 
     // of this node, and set type to the majority.
-    public int CalculateType() {
-    	//TODO: 
-    	return -1; 
+    public static int CalculateType(ArrayList<Entry> entrylst) {
+    	double sum = 0.; 
+    	for (Entry e : entrylst) {
+    		sum += e.label; 
+    	}
+    	return sum/entrylst.size() < 0.5 ? 0 : 1; 
         
     }
 
