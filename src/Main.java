@@ -17,6 +17,7 @@ public class Main {
 			
 			///////////////////////////////////////////////////////////////////
 			// Part a)
+			System.out.printf("\n\nPart a)\n");
 			NodeFactory.changeCriterion(new Criterion_MaxGain());
 			
 			for (int i : stoppingParamList) {
@@ -24,12 +25,18 @@ public class Main {
 				
 				Tree t1 = new Tree();
 				// Grow tree using bcan_train90
+				t1.growTree(bcan_train90);
 				
 				// Print the testing, validate, and training errors
+				System.out.printf("For stopping param = %d, Testing Error " +
+						"= %d, Validate Error = %d, Training Error = %d\n", 
+						i, t1.getError(bcan_test), t1.getError(bcan_validate),
+						t1.getError(bcan_train90));
 			}
 			
 			///////////////////////////////////////////////////////////////////
 			// Part b)
+			System.out.printf("\n\nPart b)\n");
 			NodeFactory.changeCriterion(new Criterion_MinError());
 			
 			for (int i : stoppingParamList) {
@@ -37,26 +44,41 @@ public class Main {
 				
 				Tree t2 = new Tree();
 				// Grow tree using bcan_train90
+				t2.growTree(bcan_train90);
 				
 				// Print the testing, validate, and training errors
+				System.out.printf("For stopping param = %d, Testing Error " +
+						"= %d, Validate Error = %d, Training Error = %d\n", 
+						i, t1.getError(bcan_test), t1.getError(bcan_validate),
+						t1.getError(bcan_train90));
 			}
 			
 			///////////////////////////////////////////////////////////////////
 			// Part c)
+			System.out.printf("\n\nPart c)\n");
 			NodeFactory.changeCriterion(new Criterion_MaxGain());
 			NodeFactory.changeStoppingParam(1);
-			Tree t3 = new Tree();
 			// Grow tree using bcan_train90
+			Tree t3 = new Tree();
+			t3.growTree(bcan_train90);
+			
 			// Prune the tree using bcan_validate
+			t3.Prune(bcan_validate);
+			
 			// Print the test errors, and total number of nodes
+			// TODO: NEED to have a function that gives the number of nodes.
+			System.out.printf("The Test Error = %d\nTotal number of nodes = %d", 
+					t1.getError(bcan_test));
 			
 			///////////////////////////////////////////////////////////////////
 			// Part d)
 			// Please refer to the function.
+			System.out.printf("\n\nPart d)\n");
 			CrossValidation(bcan_train, stoppingParamList);
 			
 			///////////////////////////////////////////////////////////////////
 			// Part e)
+			System.out.printf("\n\nPart e)\n");
 			NodeFactory.changeCriterion(new Criterion_MaxGain());
 			
 			for (int i : stoppingParamList) {
