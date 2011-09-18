@@ -6,12 +6,14 @@ public class Tree {
     
     public void growTree(ArrayList<Entry> data) throws Exception {
     	root = NodeFactory.returnNode();
-    	
     	root.m_entries = data;
     	root.Split();
     }
     
-
+    public int nodeCount() {
+    	return root.nodeCount(); 
+    }
+    
     //predicts the label of a predictee using the tree
     public int predictLabel(Entry predictee){
     	
@@ -111,7 +113,6 @@ public class Tree {
 		}
 		
 		return best; 
-    	
     }
 
     
