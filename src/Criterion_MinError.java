@@ -1,11 +1,10 @@
 import java.util.ArrayList;
 
-public class Criterion_MinError<LabelType> implements Criterion<LabelType> {
+public class Criterion_MinError implements Criterion {
 
 	@Override
-	public double CalculateSplitPerf(ArrayList<Entry<LabelType, ?>> lchild,
-			ArrayList<Entry<LabelType, ?>> rchild, ArrayList<Entry<LabelType, ?>> all) {
-		
+	public double CalculateSplitPerf(ArrayList<Entry> lchild,
+			ArrayList<Entry> rchild, ArrayList<Entry> all) {
 		
 		
 		return 0;

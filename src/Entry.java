@@ -1,15 +1,15 @@
 
-public class Entry<LabelType, FeatureType> {
+public class Entry {
 
-	public LabelType label;
-	public FeatureType[] features; 
-	public double predictedLabel; 
+	public int label;
+	public Integer[] features; 
+	public int predictedLabel; 
 
 	
-	public Entry (LabelType label, FeatureType[] features){
+	public Entry (int label, Integer[] features){
 		this.label = label;
 		this.features = features; 
-		this.predictedLabel = Double.MAX_VALUE; 
+		this.predictedLabel = Integer.MAX_VALUE; 
 	}
 	
 	

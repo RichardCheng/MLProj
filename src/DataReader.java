@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-
 public class DataReader {
 
 	public static ArrayList<Entry> read(String filepath) throws Exception{
@@ -12,8 +11,8 @@ public class DataReader {
 		String line = null;
 		String featureStr, labelStr; 
 		int index; 
-		double label; 
-		ArrayList<Double> features; 
+		Integer label; 
+		ArrayList<Integer> features; 
 		
 		ArrayList<Entry> datalst = new ArrayList<Entry>(); 
 
@@ -25,12 +24,12 @@ public class DataReader {
 			labelStr = line.substring(0, index); 
 			if (labelStr.length() == 0)
 				throw new Exception ("invalid label");
-			label = Double.parseDouble(labelStr); 
+			label = Integer.parseInt(labelStr); 
 			
 			line = line.substring(index+1).trim() + " "; 
 			
 			//find features
-			features = new ArrayList<Double>(9); 
+			features = new ArrayList<Integer>(9); 
 			while (true){
 				index = line.indexOf(' '); 
 				if (index == -1)
@@ -46,10 +45,10 @@ public class DataReader {
 				
 				if (featureStr.length() == 0)
 					throw new Exception ("invalid feature");
-				features.add(Double.parseDouble(featureStr)); 
+				features.add(Integer.parseInt(featureStr)); 
 			}
 			
-			Double[] temparray = new Double[features.size()];
+			Integer[] temparray = new Integer[features.size()];
 			features.toArray(temparray);
 			
 			datalst.add(new Entry(label, temparray));  

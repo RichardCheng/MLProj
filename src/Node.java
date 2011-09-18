@@ -8,7 +8,7 @@ public class Node {
     public ArrayList<Entry> m_entries;
     public Node m_lchild;
     public Node m_rchild;
-    public String m_type;
+    public int m_type;
 
     public int m_stoppingParam;
 
@@ -48,8 +48,8 @@ public class Node {
     }
 	
 	//gets all possible values for attribute
-	private HashSet<Double> getAllValues(int attribute){
-		HashSet<Double> values = new HashSet<Double>(); 
+	private HashSet<Integer> getAllValues(int attribute){
+		HashSet<Integer> values = new HashSet<Integer>(); 
 		for (Entry e : m_entries) {
 			values.add(e.features[attribute]); 
 		}
@@ -76,10 +76,10 @@ public class Node {
 		
 		
 		for (int attr = 0; attr < m_entries.get(0).features.length; attr ++){
-			HashSet<Double> attr_values = getAllValues(attr); 
-			for (Double v : attr_values){
+			HashSet<Integer> attr_values = getAllValues(attr); 
+			for (Integer v : attr_values){
 				SplitInfo si = new SplitInfo(m_entries, attr, v); 
-				double perf = m_splitting_criterion.CalculateSplitPerf(si.leftLst, si.rightLst);
+				double perf = m_splitting_criterion.CalculateSplitPerf(si.leftLst, si.rightLst, m_entries);
 				if (perf > bestPerf) {
 					bestLchild = si.leftLst; 
 					bestRchild = si.rightLst; 
@@ -94,10 +94,10 @@ public class Node {
 		m_splitting_feature = bestAttr; 
 		m_splitting_value = bestValue; 
 		
-		m_lchild = new Node(m_splitting_criterion, m_stoppingParam); 
+		m_lchild = NodeFactory.returnNode(); 
 		m_lchild.m_entries = bestLchild; 
 		
-		m_rchild = new Node(m_splitting_criterion, m_stoppingParam); 
+		m_rchild = NodeFactory.returnNode(); 
 		m_rchild.m_entries = bestRchild; 
 		
     	m_type = CalculateType(); 
@@ -109,9 +109,9 @@ public class Node {
 	
     /// Find the type of this node(i.e., find all children/decedents 
     // of this node, and set type to the majority.
-    public String CalculateType() {
+    public int CalculateType() {
     	//TODO: 
-    	return null; 
+    	return -1; 
         
     }
 

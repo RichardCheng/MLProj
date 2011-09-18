@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Criterion_MaxGain<LabelType> implements Criterion<LabelType> {
+public class Criterion_MaxGain implements Criterion {
 
-	private double calculateEntropy(ArrayList<Entry<LabelType, ?>> entries) {
+	private double calculateEntropy(ArrayList<Entry> entries) {
 		double entropy = 0;
-		HashMap<LabelType, Integer> test = new HashMap<LabelType, Integer>();
+		HashMap<Integer, Integer> test = new HashMap<Integer, Integer>();
 		
 		for (int i = 0; i < entries.size(); ++i) {
 			if (test.containsKey(entries.get(i).label)) {
@@ -13,7 +13,7 @@ public class Criterion_MaxGain<LabelType> implements Criterion<LabelType> {
 			}
 		}
 		
-		for (LabelType key : test.keySet()) {
+		for (int key : test.keySet()) {
 			entropy += (double)(test.get(key))/((double)entries.size());
 		}
 		
@@ -21,8 +21,8 @@ public class Criterion_MaxGain<LabelType> implements Criterion<LabelType> {
 	}
 	
 	@Override
-	public double CalculateSplitPerf(ArrayList<Entry<LabelType, ?>> lchild,
-			ArrayList<Entry<LabelType, ?>> rchild, ArrayList<Entry<LabelType, ?>> all) {
+	public double CalculateSplitPerf(ArrayList<Entry> lchild,
+			ArrayList<Entry> rchild, ArrayList<Entry> all) {
 		
 		double entropyBefore = calculateEntropy(all);
 		double entropyAfter = calculateEntropy(lchild) + calculateEntropy(rchild);
