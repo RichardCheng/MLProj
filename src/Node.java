@@ -13,7 +13,7 @@ public class Node {
     public int m_stoppingParam;
 
     public int m_splitting_feature;
-    public double m_splitting_value;
+    public int m_splitting_value;
     
     public boolean p_leafNode;
     
@@ -67,7 +67,7 @@ public class Node {
 		
 		//find the local best split
 		int bestAttr = -1; 
-		double bestValue = -1 * Double.MAX_VALUE; 
+		int bestValue = -1 * Integer.MAX_VALUE; 
 		double bestPerf = -1 * Double.MAX_VALUE; 
 		ArrayList<Entry> bestLchild = null, bestRchild = null;
 		
