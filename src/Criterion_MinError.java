@@ -6,14 +6,14 @@ public class Criterion_MinError implements Criterion {
 	public double CalculateSplitPerf(ArrayList<Entry> lchild,
 			ArrayList<Entry> rchild, ArrayList<Entry> all) {
 		
-		int typel = Node.CalculateType(lchild);
+		int typel = Node.CalculateLabel(lchild);
 		int errorCount = 0;
 		for (Entry e : lchild) {
 			if (e.label != typel) 
 				errorCount++;
 		}
 		
-		int typer = Node.CalculateType(rchild);
+		int typer = Node.CalculateLabel(rchild);
 		for (Entry e : rchild) {
 			if (e.label != typer) {
 				errorCount++;
