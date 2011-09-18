@@ -74,7 +74,7 @@ public class Main {
 			// Part d)
 			// Please refer to the function.
 			System.out.printf("\n\nPart d)\n");
-			CrossValidation(bcan_train, stoppingParamList);
+			CrossValidation(bcan_train, bcan_test, stoppingParamList);
 			
 			///////////////////////////////////////////////////////////////////
 			// Part e)
@@ -84,10 +84,15 @@ public class Main {
 			for (int i : stoppingParamList) {
 				NodeFactory.changeStoppingParam(i);
 				
-				Tree t1 = new Tree();
+				Tree t5 = new Tree();
 				// Grow tree using bcan_train30
+				t5.growTree(bcan_train30);
 				
 				// Print the testing, validate, and training errors
+				System.out.printf("For stopping param = %d, Testing Error " +
+						"= %d, Validate Error = %d, Training Error = %d\n", 
+						i, t5.getError(bcan_test), t5.getError(bcan_validate),
+						t5.getError(bcan_train30));
 			}
 			
 		} catch (Exception e) {
@@ -97,7 +102,8 @@ public class Main {
 		
 	}
 
-	private static void CrossValidation(ArrayList<Entry> bcan_train, int[] stoppingParamList) {
+	private static void CrossValidation(ArrayList<Entry> bcan_train, 
+			ArrayList<Entry> bcan_test, int[] stoppingParamList) throws Exception {
 		
 		NodeFactory.changeCriterion(new Criterion_MaxGain());
 		// Make a copy
@@ -132,10 +138,11 @@ public class Main {
 				
 				Tree t4 = new Tree();
 				// Grow tree using training_p4
+				t4.growTree(training_p4);
 				
 				// Validate the tree using validating_p4
-				
 				// Record the error at bestStoppingParamList[i][j]
+				bestStoppingParamList[i][j] = t4.getError(validating_p4);
 			}
 		}
 		
@@ -154,10 +161,15 @@ public class Main {
 		}
 		
 		// Report bestStoppingParam as best stopping param.
+		System.out.printf("The best stopping parameter = %d\n", bestStoppingParam);
 		
 		NodeFactory.changeStoppingParam(bestStoppingParam);
+		Tree t4best = new Tree();
 		// Grow tree using bcan_train
+		t4best.growTree(bcan_train);
 		
 		// Print the testing errors
+		System.out.printf("The Test Error = %d\n", 
+				t4best.getError(bcan_test));
 	}
 }
