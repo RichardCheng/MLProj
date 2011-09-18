@@ -8,7 +8,7 @@ public class Tree {
     	root = NodeFactory.returnNode();
     	
     	root.m_entries = data;
-    	root.Split();
+    	root.split();
     }
     
     //TODO

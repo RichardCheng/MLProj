@@ -18,7 +18,7 @@ public class Criterion_MaxGain implements Criterion {
 	}
 	
 	@Override
-	public double CalculateSplitPerf(ArrayList<Entry> lchild,
+	public double calculateSplitPerf(ArrayList<Entry> lchild,
 			ArrayList<Entry> rchild, ArrayList<Entry> all) {
 		
 		double entropyBefore = calculateEntropy(all);

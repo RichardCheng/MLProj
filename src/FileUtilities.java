@@ -21,7 +21,7 @@ public class FileUtilities {
 	 * @param fileloc
 	 *            : location of file to be written to
 	 */
-	public static void write(String data, String fileloc) {
+	public static void writeFile(String data, String fileloc) {
 		// Create directory folders (and possibly parent folders) if the
 		// directory does not exist
 		File f = new File(fileloc + "/..");
@@ -45,7 +45,7 @@ public class FileUtilities {
 		}
 	}
 	
-	public static void append(String data, String fileloc) {
+	public static void appendFile(String data, String fileloc) {
 		// Create directory folders (and possibly parent folders) if the
 		// directory does not exist
 		File f = new File(fileloc + "/..");
@@ -69,7 +69,7 @@ public class FileUtilities {
 		}
 	}
 
-	public static String read(String fileloc) {
+	public static String readFile(String fileloc) {
 		
 		String contents = "";
 

@@ -66,15 +66,14 @@ public class Main {
 			t3.Prune(bcan_validate);
 			
 			// Print the test errors, and total number of nodes
-			// TODO: NEED to have a function that gives the number of nodes.
 			System.out.printf("The Test Error = %d\nTotal number of nodes = %d", 
-					t3.getError(bcan_test));
+					t3.getError(bcan_test), t3.nodeCount());
 			
 			///////////////////////////////////////////////////////////////////
 			// Part d)
 			// Please refer to the function.
 			System.out.printf("\n\nPart d)\n");
-			CrossValidation(bcan_train, bcan_test, stoppingParamList);
+			crossValidation(bcan_train, bcan_test, stoppingParamList);
 			
 			///////////////////////////////////////////////////////////////////
 			// Part e)
@@ -102,7 +101,7 @@ public class Main {
 		
 	}
 
-	private static void CrossValidation(ArrayList<Entry> bcan_train, 
+	private static void crossValidation(ArrayList<Entry> bcan_train, 
 			ArrayList<Entry> bcan_test, int[] stoppingParamList) throws Exception {
 		
 		NodeFactory.changeCriterion(new Criterion_MaxGain());

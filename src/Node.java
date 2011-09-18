@@ -55,12 +55,12 @@ public class Node {
 	
     // Split the current tree into left/right children
     // Set the splitting feature and values and create l/r child
-    public void Split() throws Exception {
+    public void split() throws Exception {
 		
     	//Stop at the stopping parameter
 		if (m_entries.size() < m_stoppingParam){
 			//stop splitting
-			m_label = CalculateLabel(m_entries);
+			m_label = calculateLabel(m_entries);
 			p_leafNode = true; 
 			return;
 		}
@@ -76,7 +76,7 @@ public class Node {
 			HashSet<Integer> attr_values = getAllValues(attr); 
 			for (Integer v : attr_values){
 				SplitInfo si = new SplitInfo(m_entries, attr, v); 
-				double perf = m_splitting_criterion.CalculateSplitPerf(si.leftLst, si.rightLst, m_entries);
+				double perf = m_splitting_criterion.calculateSplitPerf(si.leftLst, si.rightLst, m_entries);
 				if (perf > bestPerf) {
 					bestLchild = si.leftLst; 
 					bestRchild = si.rightLst; 
@@ -97,18 +97,18 @@ public class Node {
 		m_rchild = NodeFactory.returnNode(); 
 		m_rchild.m_entries = bestRchild; 
 		
-    	m_label = CalculateLabel(m_entries); 
+    	m_label = calculateLabel(m_entries); 
     	p_leafNode = false; 
     	
     	
     	//recursively set everything after; 
-    	m_lchild.Split(); 
-    	m_rchild.Split(); 
+    	m_lchild.split(); 
+    	m_rchild.split(); 
     }
 	
     /// Find the label of this node(i.e., find all children/decedents 
     // of this node, and set label to the majority.
-    public static int CalculateLabel(ArrayList<Entry> entrylst) {
+    public static int calculateLabel(ArrayList<Entry> entrylst) {
     	double sum = 0.; 
     	for (Entry e : entrylst) {
     		sum += e.label; 

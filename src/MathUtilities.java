@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class MathUtilities {
 	//find euclidean distance between two entries
 	public static double euc_dist (Entry e1, Entry e2) throws Exception{
-		Entry.check(e1, e2); 
+		Entry.sanityCheck(e1, e2); 
 		double sum = 0; 
 		for (int i = 0; i < e1.features.length; i++){
 			sum += (Math.pow(e1.features[i] - e2.features[i], 2.0)); 
@@ -32,7 +32,7 @@ public class MathUtilities {
 	}
 	
 	// Compares two doubles to see if they're equal
-	public boolean DoubleEquals (double A, double B){
+	public boolean doubleEquals (double A, double B){
 	    if (A == B)
 	        return true;
 	    
