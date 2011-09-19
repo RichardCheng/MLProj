@@ -137,13 +137,13 @@ public class Node {
     	m_label = calculateLabel(m_entries); 
     	p_leafNode = false; 
     	
-    	/*
+    	
     	System.out.print(m_entries.size() + ": " + bestLchild.size() + " + " + bestRchild.size() + ": ");
     	for (Entry e : m_entries){
     		System.out.print(e.label + ","); 
     	}
     	System.out.println(); 
-    	*/
+    	
     	
     	//recursively set everything after; 
     	m_lchild.split(); 
