@@ -114,6 +114,7 @@ public class Node {
 			for (Integer v : attr_values){
 				SplitInfo si = new SplitInfo(m_entries, attr, v); 
 				double perf = m_splitting_criterion.calculateSplitPerf(si.leftLst, si.rightLst, m_entries);
+				System.out.println("perf: " + perf); 
 				if (perf > bestPerf) {
 					bestLchild = si.leftLst; 
 					bestRchild = si.rightLst; 
@@ -138,7 +139,9 @@ public class Node {
     	p_leafNode = false; 
     	
     	
-    	System.out.print(m_entries.size() + ": " + bestLchild.size() + " + " + bestRchild.size() + ": ");
+    	System.out.print(m_entries.size() + ": ");
+    	//System.out.print(bestLchild.size() + " + ");
+    	System.out.print(bestRchild.size() + ": ");
     	for (Entry e : m_entries){
     		System.out.print(e.label + ","); 
     	}
