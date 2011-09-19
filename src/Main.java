@@ -164,7 +164,6 @@ public class Main {
 		System.out.printf("The best stopping parameter = %d\n", bestStoppingParam);
 		
 		NodeFactory.changeStoppingParam(bestStoppingParam);
-		System.out.println("bestSP: " + bestStoppingParam);
 		Tree t4best = new Tree();
 		// Grow tree using bcan_train
 		t4best.growTree(bcan_train);
