@@ -156,7 +156,7 @@ public class Main {
 			
 			if (currError < bestError) {
 				bestError = currError;
-				bestStoppingParam = j;
+				bestStoppingParam = stoppingParamList[j];
 			}
 		}
 		
