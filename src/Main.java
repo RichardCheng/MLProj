@@ -53,7 +53,7 @@ public class Main {
 						t1.getError(bcan_train90), t1.nodeCount());
 			}
 			
-			System.out.println(" %% For MATLAB plotting purposes only %%"); 
+			System.out.println("%% For MATLAB plotting purposes only %%"); 
 			String xs1 = "";
 			String testings1 = "";
 			String trainings1 = "";
@@ -77,11 +77,36 @@ public class Main {
 					"title('Problem 2a) error vs node')\n" +
 					"legend('testing','training')\n\n"); 
 
+			System.out.println("## For table generation purpose only: copy to excel ##"); 
+			System.out.println("Table of number of nodes Vs. Validation Error");
+			
+			System.out.printf("Stopping Parameter");
+			for (int k = 0; k < numberNodes1.size(); ++k) {
+				System.out.printf("\t%d", stoppingParamList[k]);
+			}
+			System.out.printf("\n");
+			
+			System.out.printf("Number of Nodes");
+			for (int k = 0; k < numberNodes1.size(); ++k) {
+				System.out.printf("\t%d", numberNodes1.get(k));
+			}
+			System.out.printf("\n");
+			
+			System.out.printf("Validation Set Misclassification");
+			for (int k = 0; k < numberNodes1.size(); ++k) {
+				System.out.printf("\t%f", validatingError1.get(k));
+			}
+			System.out.printf("\n");
 			
 			///////////////////////////////////////////////////////////////////
 			// Part b)
 			System.out.printf("\n\nPart b)\n");
 			NodeFactory.changeCriterion(new Criterion_MinError());
+			
+			ArrayList<Integer> numberNodes2 = new ArrayList<Integer>();
+			ArrayList<Double> testingError2 = new ArrayList<Double>();
+			ArrayList<Double> validatingError2 = new ArrayList<Double>();
+			ArrayList<Double> trainingError2 = new ArrayList<Double>();
 			
 			for (int i : stoppingParamList) {
 				NodeFactory.changeStoppingParam(i);
@@ -90,6 +115,11 @@ public class Main {
 				// Grow tree using bcan_train90
 				t2.growTree(bcan_train90);
 				
+				numberNodes2.add(t2.nodeCount());
+				testingError2.add(t2.getError(bcan_test));
+				validatingError2.add(t2.getError(bcan_validate));
+				trainingError2.add(t2.getError(bcan_train90));
+				
 				// Print the testing, validate, and training errors
 				System.out.printf("For stopping param = %d, Testing Error " +
 						"= %f, Validate Error = %f, Training Error = %f, Number" +
@@ -97,6 +127,51 @@ public class Main {
 						i, t2.getError(bcan_test), t2.getError(bcan_validate),
 						t2.getError(bcan_train90), t2.nodeCount());
 			}
+			
+			System.out.println("%% For MATLAB plotting purposes only %%"); 
+			String xs2 = "";
+			String testings2 = "";
+			String trainings2 = "";
+			for (int k = 0; k < numberNodes2.size(); ++k) {
+				xs2 += (numberNodes2.get(k) + ", ");
+				testings2 += (testingError2.get(k) + ", ");
+				trainings2 += (trainingError2.get(k) + ", ");
+			}
+				
+			xs2 = xs2.substring(0, xs2.length()-2);
+			testings2 = testings2.substring(0, testings2.length()-2);
+			trainings2 = trainings2.substring(0, trainings2.length()-2);
+			
+			System.out.println("figure\nhold on");
+			System.out.println("node_size = [" + xs2 + "]");
+			System.out.println("testing_error = [" + testings2 + "]");
+			System.out.println("training_error = [" + trainings2 + "]");  
+			System.out.println("plot(node_size, testing_error)\n" +
+					"plot(node_size, training_error)\n" +
+					"xlabel('node number')\nylabel('error')\n" +
+					"title('Problem 2b) error vs node')\n" +
+					"legend('testing','training')\n\n"); 
+
+			System.out.println("## For table generation purpose only: copy to excel ##"); 
+			System.out.println("Table of number of nodes Vs. Validation Error");
+			
+			System.out.printf("Stopping Parameter");
+			for (int k = 0; k < numberNodes2.size(); ++k) {
+				System.out.printf("\t%d", stoppingParamList[k]);
+			}
+			System.out.printf("\n");
+			
+			System.out.printf("Number of Nodes");
+			for (int k = 0; k < numberNodes2.size(); ++k) {
+				System.out.printf("\t%d", numberNodes2.get(k));
+			}
+			System.out.printf("\n");
+			
+			System.out.printf("Validation Set Misclassification");
+			for (int k = 0; k < numberNodes2.size(); ++k) {
+				System.out.printf("\t%f", validatingError2.get(k));
+			}
+			System.out.printf("\n");
 			
 			///////////////////////////////////////////////////////////////////
 			// Part c)
@@ -125,6 +200,11 @@ public class Main {
 			System.out.printf("\n\nPart e)\n");
 			NodeFactory.changeCriterion(new Criterion_MaxGain());
 			
+			ArrayList<Integer> numberNodes5 = new ArrayList<Integer>();
+			ArrayList<Double> testingError5 = new ArrayList<Double>();
+			ArrayList<Double> validatingError5 = new ArrayList<Double>();
+			ArrayList<Double> trainingError5 = new ArrayList<Double>();
+			
 			for (int i : stoppingParamList) {
 				NodeFactory.changeStoppingParam(i);
 				
@@ -132,12 +212,37 @@ public class Main {
 				// Grow tree using bcan_train30
 				t5.growTree(bcan_train30);
 				
+				numberNodes5.add(t5.nodeCount());
+				testingError5.add(t5.getError(bcan_test));
+				validatingError5.add(t5.getError(bcan_validate));
+				trainingError5.add(t5.getError(bcan_train90));
+				
 				// Print the testing, validate, and training errors
 				System.out.printf("For stopping param = %d, Testing Error " +
 						"= %f, Validate Error = %f, Training Error = %f\n", 
 						i, t5.getError(bcan_test), t5.getError(bcan_validate),
 						t5.getError(bcan_train30));
 			}
+			
+			
+			System.out.println("%% For MATLAB plotting purposes only %%"); 
+			String xs5 = "";
+			String testings5 = "";
+			for (int k = 0; k < numberNodes5.size(); ++k) {
+				xs5 += (numberNodes5.get(k) + ", ");
+				testings5 += (testingError5.get(k) + ", ");
+			}
+				
+			xs5 = xs5.substring(0, xs5.length()-2);
+			testings5 = testings5.substring(0, testings5.length()-2);
+			
+			System.out.println("figure\nhold on");
+			System.out.println("node_size = [" + xs5 + "]");
+			System.out.println("testing_error = [" + testings5 + "]");
+			System.out.println("plot(node_size, testing_error)\n" +
+					"xlabel('node number')\nylabel('error')\n" +
+					"title('Problem 2e) training error vs node')\n\n"); 
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

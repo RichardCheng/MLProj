@@ -26,16 +26,12 @@ def main():
     meanKnn = float(knnError)/totalSample
     meanDt = float(dtError)/totalSample
 
-    stdKnn = math.sqrt((knnError*(1-meanKnn)*(1-meanKnn) + (totalSample-knnError)*(meanKnn)*(meanKnn))/totalSample)
-    stdDt = math.sqrt((dtError*(1-meanDt)*(1-meanDt) + (totalSample-dtError)*(meanDt)*(meanDt))/totalSample)
-
     print "Average error for knn = %f" % meanKnn
     print "Average error for dt = %f" % meanDt
-    print "Std for knn = %f" % stdKnn
-    print "Std for dt = %f" % stdDt
 
     print "knn exclusive number of errors = %d" % (knnError - bothError)
     print "dt exclusive number of errors = %d" % (dtError - bothError)
+    print "Both algorithm number of errors = %d" % (bothError)
 
 
 if __name__ == "__main__":
