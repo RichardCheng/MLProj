@@ -1,0 +1,42 @@
+import math
+
+def main():
+    data = []
+
+    f = open('hyp_test_pred.txt', 'r')
+    for line in f:
+        s = eval('('+line+')')
+        data.append(s)
+
+    knnError = 0
+    dtError = 0
+    bothError = 0
+    totalSample = len(data)
+
+    for entry in data:
+        if entry[0] != entry[1]:
+            knnError += 1
+
+            if entry[0] != entry[2]:
+                bothError += 1
+
+        if entry[0] != entry[2]:
+            dtError += 1
+
+    meanKnn = float(knnError)/totalSample
+    meanDt = float(dtError)/totalSample
+
+    stdKnn = math.sqrt((knnError*(1-meanKnn)*(1-meanKnn) + (totalSample-knnError)*(meanKnn)*(meanKnn))/totalSample)
+    stdDt = math.sqrt((dtError*(1-meanDt)*(1-meanDt) + (totalSample-dtError)*(meanDt)*(meanDt))/totalSample)
+
+    print "Average error for knn = %f" % meanKnn
+    print "Average error for dt = %f" % meanDt
+    print "Std for knn = %f" % stdKnn
+    print "Std for dt = %f" % stdDt
+
+    print "knn exclusive number of errors = %d" % (knnError - bothError)
+    print "dt exclusive number of errors = %d" % (dtError - bothError)
+
+
+if __name__ == "__main__":
+    main()

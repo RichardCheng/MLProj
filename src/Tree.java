@@ -19,11 +19,7 @@ public class Tree {
     	
     	Node currentNode = root; 
     	
-    	while (true) {
-    		
-    		if (currentNode.p_leafNode)
-    			return currentNode.m_label; 
-    		  		
+    	while (!currentNode.p_leafNode) {
     	    int splitting_feature = currentNode.m_splitting_feature;
     	    int splitting_value = currentNode.m_splitting_value;
     	    
@@ -32,16 +28,18 @@ public class Tree {
     	    else
     	    	currentNode = currentNode.m_rchild; 
     	}
+    	
+    	return currentNode.m_label;
     }
 
     //count how many errors are made using a set of entries (this could be the validation set or test set)
-    public int getError(ArrayList<Entry> testLst){
-    	int errorNumber = 0; 
+    public double getError(ArrayList<Entry> testLst){
+    	double errorNumber = 0; 
     	for (Entry e : testLst){
     		if (predictLabel(e) != e.label)
     			errorNumber++; 
     	}
-    	return errorNumber; 
+    	return errorNumber/testLst.size(); 
     }
     
     private class PruneData {
@@ -57,9 +55,9 @@ public class Tree {
     //prune at the node that minimizes error
     public void Prune(ArrayList<Entry> validationLst) {
     	
-    	do {
+    	while (true) {
     		//error without pruning
-    		int default_error = getError(validationLst);
+    		double default_error = getError(validationLst);
     		
     		PruneData best = whereToPrune(root, validationLst); 
     		
@@ -67,17 +65,15 @@ public class Tree {
     		if (best.n == null)
     			break;
     		//best to not prune
-    		else if (best.error > default_error)
+    		else if (best.error >= default_error)
     			break; 
     		//prune
-    		else{
+    		else {
     			best.n.m_lchild = null; 
     			best.n.m_rchild = null; 
     			best.n.p_leafNode = true; 
     		}
-    		
-    	} while (true); 
-    	
+    	}
     }
     
     //find the best place to prune (node that minimizes error)
@@ -89,7 +85,7 @@ public class Tree {
 		
 		//prune at current node
 		n.p_leafNode = true; 
-		int error_current = getError(validationLst);
+		double error_current = getError(validationLst);
 		n.p_leafNode = false; 
 		
 		//prune somewhere in left branch
@@ -115,5 +111,29 @@ public class Tree {
 		return best; 
     }
 
+    private void printNode(Node e, int indentation) {
+    	
+    	for (int i = 0; i < indentation; ++i) {
+    		System.out.printf("\t");
+    	}
+    	
+    	if (e.p_leafNode) {
+    		System.out.printf("Classify as %d with [", e.m_label);
+    		for (Entry j : e.m_entries) {
+    			System.out.printf("%d ", j.label);
+    		}
+    		System.out.println("]");
+    	}
+    	else {
+    		System.out.printf("Split on feature %d, at threshold = %d\n",
+    				e.m_splitting_feature, e.m_splitting_value);
+    		printNode(e.m_lchild, indentation+1);
+    		printNode(e.m_rchild, indentation+1);
+    	}
+    }
     
+    public void printTree() {
+    	
+    	printNode(root, 0);
+    }
 }

@@ -23,7 +23,7 @@ public class Node {
 		//split entrylst into two arraylists<Entry> according to the clause 
 		//	left: Entry.attribute.value <= compareValue
 		//	right: Entry.attribute.value > compareValue 
-		public SplitInfo (ArrayList<Entry> entrylst, int attribute, double compareValue) {
+		public SplitInfo (ArrayList<Entry> entrylst, int attribute, int compareValue) {
 			this.leftLst = new ArrayList<Entry>(); 
 			this.rightLst = new ArrayList<Entry>(); 
 			for (Entry e : entrylst) {
@@ -48,7 +48,6 @@ public class Node {
 	//gets all possible values for attribute
 	private HashSet<Integer> getAllValues(int attribute){
 		
-		
 		HashSet<Integer> values = new HashSet<Integer>(); 
 		for (Entry e : m_entries) {
 			values.add(e.features[attribute]); 
@@ -63,12 +62,11 @@ public class Node {
 		}
 		values.remove(bestI); 
 		
-		return values; 	
-		
+		return values;
 		
 		/*
 		HashSet<Integer> values = new HashSet<Integer>(); 
-		for (int i = 0; i < 10; i++)
+		for (int i = 1; i <= 10; i++)
 			values.add(i); 
 		return values; 
 		*/
@@ -109,7 +107,7 @@ public class Node {
 		ArrayList<Entry> bestLchild = null, bestRchild = null;
 		
 		
-		for (int attr = 0; attr < m_entries.get(0).features.length; attr ++){
+		for (int attr = 0; attr < m_entries.get(0).features.length; attr++){
 			HashSet<Integer> attr_values = getAllValues(attr); 
 			for (Integer v : attr_values){
 				SplitInfo si = new SplitInfo(m_entries, attr, v); 
@@ -124,6 +122,17 @@ public class Node {
 				}
 			}
 		}
+		
+		if (bestPerf <= 0){
+			//stop splitting
+			m_label = calculateLabel(m_entries);
+			p_leafNode = true; 
+			return;
+		}
+			
+		
+		if (bestLchild.size() == 0 || bestRchild.size()==0)
+			System.err.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!msg 002");
 		
 		//set everything for this node
 		m_splitting_feature = bestAttr; 

@@ -17,10 +17,11 @@ public class Criterion_MaxGain implements Criterion {
 		
 		double p0 = (double)(countZero)/((double)entries.size()); 
 		double p1 = (double)(countOne)/((double)entries.size()); 
+		
 		double res0 = (p0 == 0)?0:p0*Math.log(p0);
 		double res1 = (p1 == 0)?0:p1*Math.log(p1);
 				
-		return (res0+res1)/LOG2; 
+		return -(res0+res1)/LOG2; 
 	}
 	
 	@Override
@@ -28,9 +29,10 @@ public class Criterion_MaxGain implements Criterion {
 			ArrayList<Entry> rchild, ArrayList<Entry> all) {
 		
 		double entropyBefore = calculateEntropy(all);
-		double entropyAfter = calculateEntropy(lchild) + calculateEntropy(rchild);
+		double entropyAfter = ((double)lchild.size()) * calculateEntropy(lchild) 
+				+ ((double)rchild.size()) * calculateEntropy(rchild);
 		
-		return entropyBefore - entropyAfter;
+		return entropyBefore - (entropyAfter)/(double)all.size();
 	}
 
 }

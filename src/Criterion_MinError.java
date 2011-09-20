@@ -20,7 +20,7 @@ public class Criterion_MinError implements Criterion {
 			}
 		}
 		
-		return -errorCount;
+		return 1.0/(errorCount+1);
 	}
 
 }

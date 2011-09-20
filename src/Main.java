@@ -13,27 +13,70 @@ public class Main {
 			ArrayList<Entry> bcan_train30 = DataReader.read("bcan/bcan.train30");
 			ArrayList<Entry> bcan_train90 = DataReader.read("bcan/bcan.train90");
 			ArrayList<Entry> bcan_validate = DataReader.read("bcan/bcan.validate");
-			int[] stoppingParamList = new int[] {1,5,9,17,25,37,43,49};
 			
+			int[] stoppingParamList = new int[] {1,5,9,17,25,37,43,49};
+			/*
+			int[] stoppingParamList = new int[80];
+			for (int i = 0; i < 80; ++i) 
+				stoppingParamList[i] = i+1;
+			*/
 			///////////////////////////////////////////////////////////////////
 			
 			// Part a)
 			System.out.printf("\n\nPart a)\n");
 			NodeFactory.changeCriterion(new Criterion_MaxGain());
 			
+			ArrayList<Integer> numberNodes1 = new ArrayList<Integer>();
+			ArrayList<Double> testingError1 = new ArrayList<Double>();
+			ArrayList<Double> validatingError1 = new ArrayList<Double>();
+			ArrayList<Double> trainingError1 = new ArrayList<Double>();
+			
 			for (int i : stoppingParamList) {
 				NodeFactory.changeStoppingParam(i);
 				
 				Tree t1 = new Tree();
 				// Grow tree using bcan_train90
-				t1.growTree(bcan_train90);
+				t1. growTree(bcan_train90);
+				
+				//t1.printTree();
+				
+				numberNodes1.add(t1.nodeCount());
+				testingError1.add(t1.getError(bcan_test));
+				validatingError1.add(t1.getError(bcan_validate));
+				trainingError1.add(t1.getError(bcan_train90));
 				
 				// Print the testing, validate, and training errors
 				System.out.printf("For stopping param = %d, Testing Error " +
-						"= %d, Validate Error = %d, Training Error = %d\n", 
+						"= %f, Validate Error = %f, Training Error = %f, Number" +
+						" of nodes = %d\n", 
 						i, t1.getError(bcan_test), t1.getError(bcan_validate),
-						t1.getError(bcan_train90));
+						t1.getError(bcan_train90), t1.nodeCount());
 			}
+			
+			System.out.println(" %% For MATLAB plotting purposes only %%"); 
+			String xs1 = "";
+			String testings1 = "";
+			String trainings1 = "";
+			for (int k = 0; k < numberNodes1.size(); ++k) {
+				xs1 += (numberNodes1.get(k) + ", ");
+				testings1 += (testingError1.get(k) + ", ");
+				trainings1 += (trainingError1.get(k) + ", ");
+			}
+				
+			xs1 = xs1.substring(0, xs1.length()-2);
+			testings1 = testings1.substring(0, testings1.length()-2);
+			trainings1 = trainings1.substring(0, trainings1.length()-2);
+			
+			System.out.println("figure\nhold on");
+			System.out.println("node_size = [" + xs1 + "]");
+			System.out.println("testing_error = [" + testings1 + "]");
+			System.out.println("training_error = [" + trainings1 + "]");  
+			System.out.println("plot(node_size, testing_error)\n" +
+					"plot(node_size, training_error)\n" +
+					"xlabel('node number')\nylabel('error')\n" +
+					"title('Problem 2a) error vs node')\n" +
+					"legend('testing','training')\n\n"); 
+
 			
 			///////////////////////////////////////////////////////////////////
 			// Part b)
@@ -49,9 +92,10 @@ public class Main {
 				
 				// Print the testing, validate, and training errors
 				System.out.printf("For stopping param = %d, Testing Error " +
-						"= %d, Validate Error = %d, Training Error = %d\n", 
+						"= %f, Validate Error = %f, Training Error = %f, Number" +
+						" of nodes = %d\n", 
 						i, t2.getError(bcan_test), t2.getError(bcan_validate),
-						t2.getError(bcan_train90));
+						t2.getError(bcan_train90), t2.nodeCount());
 			}
 			
 			///////////////////////////////////////////////////////////////////
@@ -67,7 +111,7 @@ public class Main {
 			t3.Prune(bcan_validate);
 			
 			// Print the test errors, and total number of nodes
-			System.out.printf("The Test Error = %d\nTotal number of nodes = %d", 
+			System.out.printf("The Test Error = %f\nTotal number of nodes = %d", 
 					t3.getError(bcan_test), t3.nodeCount());
 			
 			///////////////////////////////////////////////////////////////////
@@ -90,11 +134,10 @@ public class Main {
 				
 				// Print the testing, validate, and training errors
 				System.out.printf("For stopping param = %d, Testing Error " +
-						"= %d, Validate Error = %d, Training Error = %d\n", 
+						"= %f, Validate Error = %f, Training Error = %f\n", 
 						i, t5.getError(bcan_test), t5.getError(bcan_validate),
 						t5.getError(bcan_train30));
 			}
-			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -120,7 +163,7 @@ public class Main {
 		}
 		
 		// Generate errors for all cases
-		int[][] bestStoppingParamList = new int[10][stoppingParamList.length];
+		double[][] bestStoppingParamList = new double[10][stoppingParamList.length];
 		for (int i = 0; i < 10; ++i) {
 			ArrayList<Entry> training_p4 = new ArrayList<Entry>();
 			ArrayList<Entry> validating_p4 = new ArrayList<Entry>();
@@ -169,7 +212,7 @@ public class Main {
 		t4best.growTree(bcan_train);
 		
 		// Print the testing errors
-		System.out.printf("The Test Error = %d\n", 
+		System.out.printf("The Test Error = %f\n", 
 				t4best.getError(bcan_test));
 	}
 }
