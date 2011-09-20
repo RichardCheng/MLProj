@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class MathUtilities {
@@ -47,6 +48,7 @@ public class MathUtilities {
 	
 	// Generate a random integer in range [lowRange, highRange)
 	public static int genRandomIntRange(int lowRange, int highRange) {
-		return lowRange+(int)(Math.random()*(highRange-lowRange));
+		Random generator = new Random();	
+		return lowRange+generator.nextInt(highRange-lowRange);
 	}			
 }

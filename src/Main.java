@@ -192,8 +192,10 @@ public class Main {
 			///////////////////////////////////////////////////////////////////
 			// Part d)
 			// Please refer to the function.
+			for (int i = 0; i < 1000; ++i) {
 			System.out.printf("\n\nPart d)\n");
 			crossValidation(bcan_train, bcan_test, stoppingParamList);
+			}
 			
 			///////////////////////////////////////////////////////////////////
 			// Part e)
@@ -267,6 +269,14 @@ public class Main {
 			}
 		}
 		
+		/*
+		System.out.printf("First few entries:");
+		for (int i = 0; i < 10; ++i) {
+			System.out.printf("%s ", bcan_train_cp.get(i).toString());
+		}
+		System.out.printf("\n");
+		*/
+		
 		// Generate errors for all cases
 		double[][] bestStoppingParamList = new double[10][stoppingParamList.length];
 		for (int i = 0; i < 10; ++i) {
@@ -276,9 +286,9 @@ public class Main {
 			// Build training and validating set with train
 			for (int j = 0; j < i*55; ++j) {
 				if (j < i*55 || j >= (i+1)*55)
-					training_p4.add(bcan_train.get(j));
+					training_p4.add(bcan_train_cp.get(j));
 				else
-					validating_p4.add(bcan_train.get(j));
+					validating_p4.add(bcan_train_cp.get(j));
 			}
 			
 			for (int j= 0; j < stoppingParamList.length; ++j) {
