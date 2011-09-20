@@ -50,5 +50,5 @@ public class MathUtilities {
 	public static int genRandomIntRange(int lowRange, int highRange) {
 		Random generator = new Random();	
 		return lowRange+generator.nextInt(highRange-lowRange);
-	}			
+	}
 }

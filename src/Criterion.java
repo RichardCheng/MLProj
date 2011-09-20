@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+// Interface of criterion
 public interface Criterion {
     // Return a double represents how good the split is. 
     // Higher the value is, better the split is.

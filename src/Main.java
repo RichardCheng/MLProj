@@ -4,8 +4,6 @@ public class Main {
 	
 	public static void main(String[] args){
 		try {
-			// OK let's do this.
-			
 			///////////////////////////////////////////////////////////////////
 			//// Data used across various parts.
 			ArrayList<Entry> bcan_test = DataReader.read("bcan/bcan.test");
@@ -15,13 +13,7 @@ public class Main {
 			ArrayList<Entry> bcan_validate = DataReader.read("bcan/bcan.validate");
 			
 			int[] stoppingParamList = new int[] {1,5,9,17,25,37,43,49};
-			/*
-			int[] stoppingParamList = new int[80];
-			for (int i = 0; i < 80; ++i) 
-				stoppingParamList[i] = i+1;
-			*/
 			///////////////////////////////////////////////////////////////////
-			
 			// Part a)
 			System.out.printf("\n\nPart a)\n");
 			NodeFactory.changeCriterion(new Criterion_MaxGain());

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+//The criterion that the split with minimum misclassification error is selected 
 public class Criterion_MinError implements Criterion {
 
 	@Override
