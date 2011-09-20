@@ -6,6 +6,13 @@ public class Criterion_MinError implements Criterion {
 	public double calculateSplitPerf(ArrayList<Entry> lchild,
 			ArrayList<Entry> rchild, ArrayList<Entry> all) {
 		
+		int type0 = Node.calculateLabel(all); 
+		int errorCount0 = 0; 
+		for (Entry e : all) {
+			if (e.label != type0) 
+				errorCount0++; 
+		}
+		
 		int typel = Node.calculateLabel(lchild);
 		int errorCount = 0;
 		for (Entry e : lchild) {
@@ -20,7 +27,7 @@ public class Criterion_MinError implements Criterion {
 			}
 		}
 		
-		return 1.0/(errorCount+1);
+		return errorCount0 - errorCount;
 	}
 
 }
