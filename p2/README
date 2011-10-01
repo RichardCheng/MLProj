@@ -1,0 +1,17 @@
+Heng zhe Duan(hd79), Yu Cheng(yc489)
+
+Usage:
+The easiest way to use it is to import this project into Eclipse and run from 
+there. 
+
+Main decisions:
+We used a proxy pattern on applying the split criterion, where when we passed
+in min_error and max_gain criterion, the code to the tree will be reused, and 
+the tree is built according to given criterion automatically. 
+
+We also used a static factory to produce the nodes, so that when we need to 
+change the type of node produced(different stopping parameter or different 
+splitting criterion), we could simply change the parameter of that factory, 
+while all other part of the code remains.
+
+
