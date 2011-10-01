@@ -42,6 +42,7 @@ public class Tree {
     	return errorNumber/testLst.size(); 
     }
     
+    // private class that holds the pair of Node and the error if pruning this node.
     private class PruneData {
     	public Node n; 
     	public double error; 
@@ -111,6 +112,7 @@ public class Tree {
 		return best; 
     }
 
+    // Print a node in the tree with given indentation
     private void printNode(Node e, int indentation) {
     	
     	for (int i = 0; i < indentation; ++i) {
@@ -132,8 +134,8 @@ public class Tree {
     	}
     }
     
+    // DEBUG ONLY: print the decision tree. 
     public void printTree() {
-    	
     	printNode(root, 0);
     }
 }

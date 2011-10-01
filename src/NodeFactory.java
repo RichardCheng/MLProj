@@ -1,3 +1,4 @@
+// Static factory to generate nodes with given stopping parameter and criterion.
 public class NodeFactory {
 
     public static Criterion m_currCriterion = null;

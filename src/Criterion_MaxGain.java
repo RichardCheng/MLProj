@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+// The criterion that the split with maximum information gain is selected 
 public class Criterion_MaxGain implements Criterion {
 
 	private static double LOG2 = Math.log(2);

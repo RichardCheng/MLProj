@@ -63,22 +63,14 @@ public class Node {
 		values.remove(bestI); 
 		
 		return values;
-		
-		/*
-		HashSet<Integer> values = new HashSet<Integer>(); 
-		for (int i = 1; i <= 10; i++)
-			values.add(i); 
-		return values; 
-		*/
 	}
-
 	
     // Split the current tree into left/right children
     // Set the splitting feature and values and create l/r child
     public void split() throws Exception {
 		
     	//Stop at the stopping parameter
-		if (m_entries.size() < m_stoppingParam){
+		if (m_entries.size() <= m_stoppingParam){
 			//stop splitting
 			m_label = calculateLabel(m_entries);
 			p_leafNode = true; 
@@ -129,11 +121,7 @@ public class Node {
 			p_leafNode = true; 
 			return;
 		}
-			
-		
-		if (bestLchild.size() == 0 || bestRchild.size()==0)
-			System.err.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!msg 002");
-		
+				
 		//set everything for this node
 		m_splitting_feature = bestAttr; 
 		m_splitting_value = bestValue; 
@@ -146,17 +134,6 @@ public class Node {
 		
     	m_label = calculateLabel(m_entries); 
     	p_leafNode = false; 
-    	
-    	
-    	/*
-    	System.out.print(m_entries.size() + ": ");
-    	System.out.print(bestLchild.size() + " + ");
-    	System.out.print(bestRchild.size() + ": ");
-    	for (Entry e : m_entries){
-    		System.out.print(e.label + ","); 
-    	}
-    	System.out.println(); 
-    	*/
     	
     	//recursively set everything after; 
     	m_lchild.split(); 
@@ -173,6 +150,7 @@ public class Node {
     	return sum/entrylst.size() < 0.5 ? 0 : 1; 
     }
    
+    // The count of nodes in the subtree of this node.
     public int nodeCount(){
     	if (this.m_lchild == null && this.m_rchild == null)
     		return 1; 
