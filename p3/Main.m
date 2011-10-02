@@ -35,7 +35,7 @@ end
 
 clear w;
 clear b;
-clear trainX;
+clear trainx;
 clear trainY;
 
 
@@ -95,16 +95,6 @@ clear b3;
 clear trainY3;
 clear trainX3;
 
-
-validErrorRate
-validErrorRate1
-validErrorRate2
-validErrorRate3
-
-trainErrorRate
-trainErrorRate1
-trainErrorRate2
-trainErrorRate3
 
 figure 
 hold on

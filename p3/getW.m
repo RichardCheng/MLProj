@@ -18,7 +18,7 @@ R = max(normv);
 cont = 1;
 j = 1;
 
-while (cont)
+while (cont && j < 50)
     cont = 0;
 
     wM(j, :) = wM(k, :);
