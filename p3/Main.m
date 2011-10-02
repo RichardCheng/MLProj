@@ -9,13 +9,6 @@ disp 'reading validation data...'
 [validY, validX] = readData('movie/polarity.validation');
 
 
-disp 'reading training data...'
-[trainY, trainX] = readData('movie/polarity.train');
-
-disp 'getting W for training data...'
-[w, b] = getW(trainY, trainX);
-
-
 totIter = 20;
 validErrorRate = zeros(1, totIter);
 trainErrorRate = zeros(1, totIter);
@@ -26,11 +19,24 @@ trainErrorRate2 = zeros(1, totIter);
 validErrorRate3 = zeros(1, totIter);
 trainErrorRate3 = zeros(1, totIter);
 
+
+
+disp 'reading training data...'
+[trainY, trainX] = readData('movie/polarity.train');
+
+disp 'getting W for training data...'
+[w, b] = getW(trainY, trainX);
+
 disp 'getting Error rates...'
 for i = 2:(totIter+1)
     validErrorRate(i-1) = getErrorRate(validY, validX, w(i,:), b(i));
     trainErrorRate(i-1) = getErrorRate(trainY, trainX, w(i,:), b(i));
 end
+
+clear w;
+clear b;
+clear trainX;
+clear trainY;
 
 
 
@@ -52,6 +58,7 @@ clear trainY1;
 clear trainX1;
 
 
+
 disp 'reading training data2...'
 [trainY2, trainX2] = readData('movie/polarity-reorder-2.train');
 
@@ -68,6 +75,7 @@ clear w2;
 clear b2;
 clear trainY2;
 clear trainX2;
+
 
 
 disp 'reading training data3...'
@@ -88,6 +96,16 @@ clear trainY3;
 clear trainX3;
 
 
+validErrorRate
+validErrorRate1
+validErrorRate2
+validErrorRate3
+
+trainErrorRate
+trainErrorRate1
+trainErrorRate2
+trainErrorRate3
+
 figure 
 hold on
 plot (1:totIter, validErrorRate, 'g')
@@ -96,7 +114,6 @@ xlabel ('Iteration Number')
 ylabel ('Error Rate')
 legend ('validation error rate', 'training error rate')
 title ('1a')
-
 
 figure 
 hold on
@@ -108,7 +125,6 @@ xlabel ('Iteration Number')
 ylabel ('Error Rate')
 legend ('validErrorRate on train', 'validErrorRate on train1', 'validErrorRate on train2', 'validErrorRate on train3')
 title ('1c part1')
-
 
 figure 
 hold on
