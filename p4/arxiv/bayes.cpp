@@ -65,7 +65,7 @@ int predictc(entry e) {
     else return -1;
 }
 
-int predict(entry e) {
+int predictb(entry e) {
     double pos = log(py);
     double neg = log(pny);
 
@@ -112,7 +112,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    cout << "MAX feature = " << max_feature << endl;
+    cout << "Max feature = " << max_feature << endl;
 
     // Calculate probability
     for (int i = 0; i <= max_feature; ++i) {
@@ -120,8 +120,8 @@ int main(int argc, char* argv[]) {
         neg_prob.push_back(log((double)(neg_word_map[i]+1)/(double)(neg_word_count + max_feature)));
     }
 
-    cout << "total pos = " << pos_word_count << endl;
-    cout << "total neg = " << neg_word_count << endl;
+    cout << "total pos words = " << pos_word_count << endl;
+    cout << "total neg words = " << neg_word_count << endl;
 
     cout << "total pos count = " << pos_ins_count << endl;
     cout << "total neg count = " << neg_ins_count << endl;
@@ -129,8 +129,8 @@ int main(int argc, char* argv[]) {
     py = (double)(pos_ins_count) / ((double)(pos_ins_count+neg_ins_count));
     pny = (double)(neg_ins_count) / ((double)(pos_ins_count+neg_ins_count));
 
-    cout << "py = " << py << endl;
-    cout << "pny = " << pny << endl;
+    cout << "pos y prob = " << py << endl;
+    cout << "neg y prob = " << pny << endl;
 
     // Do prediction
     int correct = 0;
@@ -147,7 +147,7 @@ int main(int argc, char* argv[]) {
         if (s.length() > 0) {
             entry e(s);
 
-            if (predict(e) == e.classification) {
+            if (predictb(e) == e.classification) {
                 ++correct;            
             }
             else if (e.classification == 1) {
@@ -169,6 +169,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    cout << "part b:" << endl;
     cout << "correct = " << correct << endl;
     cout << "falsepos = " << falsepos << endl;
     cout << "falseneg = " << falseneg << endl;
