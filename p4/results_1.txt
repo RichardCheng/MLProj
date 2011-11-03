@@ -157,6 +157,95 @@ error = error_a + error_b;
 -----------------------------------------------------------------
 
 Part 1d)
+
+Choosing C:
+
+Reading model...done.
+Reading test examples... (383 examples) done.
+Classifying test examples...done
+Runtime (without IO) in cpu-seconds: 0.00
+Average loss on test set: 27.6762
+Zero/one-error on test set: 27.68% (277 correct, 106 incorrect, 383 total
+
+Reading model...done.
+Reading test examples... (383 examples) done.
+Classifying test examples...done
+Runtime (without IO) in cpu-seconds: 0.00
+Average loss on test set: 67.1018
+Zero/one-error on test set: 67.10% (126 correct, 257 incorrect, 383 total
+
+Reading model...done.
+Reading test examples... (383 examples) done.
+Classifying test examples...done
+Runtime (without IO) in cpu-seconds: 0.00
+Average loss on test set: 67.1018
+Zero/one-error on test set: 67.10% (126 correct, 257 incorrect, 383 total
+
+Reading model...done.
+Reading test examples... (383 examples) done.
+Classifying test examples...done
+Runtime (without IO) in cpu-seconds: 0.00
+Average loss on test set: 58.7467
+Zero/one-error on test set: 58.75% (158 correct, 225 incorrect, 383 total
+
+Reading model...done.
+Reading test examples... (383 examples) done.
+Classifying test examples...done
+Runtime (without IO) in cpu-seconds: 0.00
+Average loss on test set: 56.3969
+Zero/one-error on test set: 56.40% (167 correct, 216 incorrect, 383 total
+
+Reading model...done.
+Reading test examples... (383 examples) done.
+Classifying test examples...done
+Runtime (without IO) in cpu-seconds: 0.00
+Average loss on test set: 32.1149
+Zero/one-error on test set: 32.11% (260 correct, 123 incorrect, 383 total
+
+Reading model...done.
+Reading test examples... (383 examples) done.
+Classifying test examples...done
+Runtime (without IO) in cpu-seconds: 0.00
+Average loss on test set: 15.6658
+Zero/one-error on test set: 15.67% (323 correct, 60 incorrect, 383 total)
+
+Reading model...done.
+Reading test examples... (383 examples) done.
+Classifying test examples...done
+Runtime (without IO) in cpu-seconds: 0.00
+Average loss on test set: 13.5770
+Zero/one-error on test set: 13.58% (331 correct, 52 incorrect, 383 total)
+
+Reading model...done.
+Reading test examples... (383 examples) done.
+Classifying test examples...done
+Runtime (without IO) in cpu-seconds: 0.00
+Average loss on test set: 12.0104
+Zero/one-error on test set: 12.01% (337 correct, 46 incorrect, 383 total)
+
+Reading model...done.
+Reading test examples... (383 examples) done.
+Classifying test examples...done
+Runtime (without IO) in cpu-seconds: 0.00
+Average loss on test set: 9.9217
+Zero/one-error on test set: 9.92% (345 correct, 38 incorrect, 383 total)
+
+Reading model...done.
+Reading test examples... (383 examples) done.
+Classifying test examples...done
+Runtime (without IO) in cpu-seconds: 0.00
+Average loss on test set: 10.7050
+Zero/one-error on test set: 10.70% (342 correct, 41 incorrect, 383 total)
+
+Reading model...done.
+Reading test examples... (383 examples) done.
+Classifying test examples...done
+Runtime (without IO) in cpu-seconds: 0.00
+Average loss on test set: 7.0496
+Zero/one-error on test set: 7.05% (356 correct, 27 incorrect, 383 total)
+
+Running SVM on test: (based on C=5)
+
 Reading model...done.
 Reading test examples... (1797 examples) done.
 Classifying test examples...done
