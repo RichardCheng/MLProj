@@ -1,0 +1,198 @@
+3a)
+
+**NORMALIZED DATA**
+
+default C)
+
+Runtime (without IO) in cpu-seconds: 0.01
+Accuracy on test set: 96.81% (31451 correct, 1036 incorrect, 32487 total)
+Precision/recall on test set: 95.92%/90.17%
+
+false positive rate is 291/32487=0.008957
+false_negative rate is 745/32487=0.022932
+
+Changing C) 
+
+(Here i represent which section is used as the validation set)
+i is 0 (for each C)
+77.14 81.50 95.77 97.30
+i is 1 (for each C)
+76.43 80.77 95.46 96.64
+i is 2 (for each C)
+75.50 79.67 95.37 96.72
+i is 3 (for each C)
+76.70 81.08 95.44 97.03
+
+C=1 is used in the best model since this is when the accuracy on the validation set is maximized
+
+Runtime (without IO) in cpu-seconds: 0.03
+Accuracy on test set: 96.81% (31451 correct, 1036 incorrect, 32487 total)
+Precision/recall on test set: 95.92%/90.17%
+
+false positive rate is 291/32487=0.008957
+false_negative rate is 745/32487=0.022932
+
+**UNNORMALIZED DATA**
+
+default C)
+
+Runtime (without IO) in cpu-seconds: 0.01
+Accuracy on test set: 96.08% (31214 correct, 1273 incorrect, 32487 total)
+Precision/recall on test set: 96.66%/86.19%
+
+false positive rate is 226/32487=0.006957
+false_negative rate is 1047/32487=0.032228
+
+Changing C)
+
+(Here i represent which section is used as the validation set)
+i is 0
+95.32 96.71 95.90 95.20
+i is 1
+95.16 96.48 95.88 95.45
+i is 2
+94.87 96.39 95.62 95.21
+i is 3
+95.02 96.55 95.74 95.36
+
+C=0.01 is used in the best model since this is when teh accuracy on teh validation set is maximized
+
+Runtime (without IO) in cpu-seconds: 0.02
+Accuracy on test set: 96.43% (31327 correct, 1160 incorrect, 32487 total)
+Precision/recall on test set: 95.91%/88.47%
+
+false positive rate is 286/32487=0.008804
+false_negative rate is 874/32487=0.026903
+
+It seems like that the normalized data set is slightly better from the results that we get.
+However, more notably, it seems that for the normalized data set, changing C makes a much bigger
+difference than it does for unnormalized dataset. 
+
+----------------------------------------------------------------------------------------------------
+
+3d)
+
+default C)
+
+Runtime (without IO) in cpu-seconds: 0.02
+Accuracy on test set: 96.21% (31257 correct, 1230 incorrect, 32487 total)
+Precision/recall on test set: 91.10%/92.85%
+
+false positive rate is 688/32487=0.021178
+false_negative rate is 542/32487=0.016684
+
+Changing C)
+i is 0
+23.25 78.68 95.45 96.12
+i is 1
+23.56 78.31 95.49 96.53
+i is 2
+23.53 78.85 95.30 96.43
+i is 3
+23.47 78.00 95.20 96.28
+
+i is 0: (in order of C= 0.001, 0.01, 0.1, 1)
+
+false positive rate is 5735/7472=0.767532
+false_negative rate is 0/7472=0.000000
+
+false positive rate is 1566/7472=0.209582
+false_negative rate is 27/7472=0.003613
+
+false positive rate is 273/7472=0.036536
+false_negative rate is 67/7472=0.008967
+
+false positive rate is 150/7472=0.020075
+false_negative rate is 140/7472=0.018737
+
+i is 1: (in order of C= 0.001, 0.01, 0.1, 1)
+
+false positive rate is 5712/7473=0.764352
+false_negative rate is 0/7473=0.000000
+
+false positive rate is 1597/7473=0.213703
+false_negative rate is 24/7473=0.003212
+
+false positive rate is 268/7473=0.035862
+false_negative rate is 69/7473=0.009233
+
+false positive rate is 136/7473=0.018199
+false_negative rate is 123/7473=0.016459
+
+i is 2: (in order of C= 0.001, 0.01, 0.1, 1)
+
+false positive rate is 5714/7472=0.764722
+false_negative rate is 0/7472=0.000000
+
+false positive rate is 1562/7472=0.209047
+false_negative rate is 18/7472=0.002409
+
+false positive rate is 285/7472=0.038142
+false_negative rate is 66/7472=0.008833
+
+false positive rate is 132/7472=0.017666
+false_negative rate is 135/7472=0.018067
+
+i is 3: (in order of C= 0.001, 0.01, 0.1, 1)
+
+false positive rate is 5719/7473=0.765288
+false_negative rate is 0/7473=0.000000
+
+false positive rate is 1626/7473=0.217583
+false_negative rate is 18/7473=0.002409
+
+false positive rate is 292/7473=0.039074
+false_negative rate is 67/7473=0.008966
+
+false positive rate is 145/7473=0.019403
+false_negative rate is 133/7473=0.017797
+
+
+During cross validation, you should be minimizing the value:
+false_positive_rate + false_negative_rate * 10
+This is because we assume that having a single false negative is 10 times as bad as having
+a false positive. 
+
+The best C is 0.1 since this minimizes (false_positive_rate + false_negative_rate * 10)
+across all runs. 
+
+Runtime (without IO) in cpu-seconds: 0.02
+Accuracy on test set: 95.17% (30919 correct, 1568 incorrect, 32487 total)
+Precision/recall on test set: 85.04%/96.24%
+
+false positive rate is 1283/32487=0.039493
+false_negative rate is 285/32487=0.008773
+
+assuming having a single false negative is 10 times as bad as having a false positive:
+let penalty = 10 * false_negative_rate + false_positive_rate
+before adjusting C, we have a penalty of 0.021178 + 10(0.016684) = 0.188018
+and after adjusting C, we have a penalty of 0.039493 + 10(0.008773) = 0.127223
+So, the results are better after adjusting C.
+
+Furthermore, before introducing the j parameter, 
+we have a penalty of 0.008957 + 10(0.022932) = 0.238277
+
+So the j parameter definitely help to get what we want in the case when false_positive_rate
+and false_negative_rate are weighed differently
+
+----------------------------------------------------------------------------------------------------
+
+3e)
+Advantages of Naive Bayes Classifier:
+
+Much easier to implement than SVM
+
+Training is more efficient with Naive Bayes
+
+it only needs a small training set to estimate the parameters such as the mean, which are used for classification.
+Furthermore, if the naive bayes assumption actually holds (i.e. features are independent), then Naive Bayes will converge quickly
+
+You can handle multiclass quite easier
+
+Advantages of SVM:
+
+Prediction is more accurate. Furthermore, it is more stable and robust.
+
+There are theoretical guarantees (i.e. against overfitting)
+
+You can change the kernel very easily to adjust to the structure of the data (i.e. high-dimensional space)

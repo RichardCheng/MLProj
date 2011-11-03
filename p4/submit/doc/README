@@ -1,0 +1,9 @@
+Heng zhe Duan(hd79), Yu Cheng(yc489)
+
+Usage:
+make bayes
+./bayes <Training_File> <Validation_File>
+
+The program follows the Naive Bayes algorithms given. It stores all the probability in natural log base to avoid underflow. It uses a struct entry to extract the information from the given data, and stores frequencies of words in a map, and probability values for each word in a vector. 
+
+The results_1.txt and results_3.txt are intermediate files containing results. They are the data went into the final write up, hw4.docx
